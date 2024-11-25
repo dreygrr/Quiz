@@ -1,0 +1,358 @@
+@import url("https://fonts.googleapis.com/css2?family=Host+Grotesk:ital,wght@0,300..800;1,300..800&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Host+Grotesk:ital,wght@0,300..800;1,300..800&display=swap");
+:root {
+  --white: #fff;
+  --black: #000;
+  --indigo50: #eef2ff;
+  --indigo100: #e0e7ff;
+  --indigo200: #c7d2fe;
+  --indigo300: #a5b4fc;
+  --indigo400: #818cf8;
+  --indigo500: #6366f1;
+  --indigo600: #4f46e5;
+  --indigo700: #4338ca;
+  --indigo800: #3730a3;
+  --indigo900: #312e81;
+  --indigo950: #1e1b4b;
+  --emerald50: #ecfdf5;
+  --emerald100: #d1fae5;
+  --emerald200: #a7f3d0;
+  --emerald300: #6ee7b7;
+  --emerald400: #34d399;
+  --emerald500: #10b981;
+  --emerald600: #059669;
+  --emerald700: #047857;
+  --emerald800: #065f46;
+  --emerald900: #064e3b;
+  --emerald950: #022c22;
+  --red50: #fef2f2;
+  --red100: #fee2e2;
+  --red200: #fecaca;
+  --red300: #fca5a5;
+  --red400: #f87171;
+  --red500: #ef4444;
+  --red600: #dc2626;
+  --red700: #b91c1c;
+  --red800: #991b1b;
+  --red900: #7f1d1d;
+  --red950: #450a0a;
+  --title: var(--indigo950);
+  --link: var(--indigo600);
+  --msg: var(--indigo300);
+  --msg-text: var(--indigo900);
+  --msg-err: var(--red600);
+  --msg-err-text: var(--white);
+  --msg-ok: var(--emerald700);
+  --msg-ok-text: var(--white);
+  --btn: var(--indigo300);
+  --btn-text: var(--indigo950);
+  --btn-fill: var(--indigo600);
+  --btn-fill-text: var(--white);
+  --btn-fill-hover: var(--indigo500);
+}
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: "Host Grotesk", sans-serif;
+  font-size: 1rem;
+}
+
+h1 {
+  font-size: 2.5rem;
+  font-weight: 800;
+  color: var(--title);
+}
+
+a {
+  text-decoration: underline;
+  color: var(--link);
+}
+
+.btn {
+  padding: 0.5em 1em;
+  font-size: 0.9rem;
+  font-weight: 300;
+  border-radius: 0.5em;
+  text-transform: capitalize;
+  text-decoration: none;
+  background-color: var(--btn);
+  color: var(--btn-text);
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: 0.2s;
+}
+.btn.btn-fill {
+  background-color: var(--btn-fill);
+  color: var(--btn-fill-text);
+}
+.btn.btn-fill:active, .btn.btn-fill:focus, .btn.btn-fill:hover {
+  background-color: var(--btn-fill-hover);
+}
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: unset;
+  align-items: center;
+  gap: 2em;
+  min-height: 100vh;
+  padding: 1em;
+  background-color: var(--indigo100);
+}
+
+.block {
+  display: flex;
+  flex-direction: column;
+  justify-content: unset;
+  align-items: flex-start;
+  gap: 1em;
+  padding: 3em;
+  border-radius: 1em;
+  background-color: var(--white);
+}
+
+.msg {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5em;
+  padding: 0.25em 1em;
+  font-size: 0.9rem;
+  font-weight: 600;
+  border-radius: 3em;
+  background-color: var(--msg);
+  color: var(--msg-text);
+}
+.msg p, .msg a {
+  font-size: 0.9rem;
+  color: var(--msg-text);
+}
+.msg.msg-err {
+  background-color: var(--msg-err);
+  color: var(--msg-err-text);
+}
+.msg.msg-err p, .msg.msg-err a {
+  color: var(--white);
+}
+.msg.msg-ok {
+  background-color: var(--msg-ok);
+  color: var(--msg-ok-text);
+}
+.msg.msg-ok p, .msg.msg-ok a {
+  color: var(--white);
+}
+
+:root {
+  --white: #fff;
+  --black: #000;
+  --indigo50: #eef2ff;
+  --indigo100: #e0e7ff;
+  --indigo200: #c7d2fe;
+  --indigo300: #a5b4fc;
+  --indigo400: #818cf8;
+  --indigo500: #6366f1;
+  --indigo600: #4f46e5;
+  --indigo700: #4338ca;
+  --indigo800: #3730a3;
+  --indigo900: #312e81;
+  --indigo950: #1e1b4b;
+  --emerald50: #ecfdf5;
+  --emerald100: #d1fae5;
+  --emerald200: #a7f3d0;
+  --emerald300: #6ee7b7;
+  --emerald400: #34d399;
+  --emerald500: #10b981;
+  --emerald600: #059669;
+  --emerald700: #047857;
+  --emerald800: #065f46;
+  --emerald900: #064e3b;
+  --emerald950: #022c22;
+  --red50: #fef2f2;
+  --red100: #fee2e2;
+  --red200: #fecaca;
+  --red300: #fca5a5;
+  --red400: #f87171;
+  --red500: #ef4444;
+  --red600: #dc2626;
+  --red700: #b91c1c;
+  --red800: #991b1b;
+  --red900: #7f1d1d;
+  --red950: #450a0a;
+  --title: var(--indigo950);
+  --link: var(--indigo600);
+  --msg: var(--indigo300);
+  --msg-text: var(--indigo900);
+  --msg-err: var(--red600);
+  --msg-err-text: var(--white);
+  --msg-ok: var(--emerald700);
+  --msg-ok-text: var(--white);
+  --btn: var(--indigo300);
+  --btn-text: var(--indigo950);
+  --btn-fill: var(--indigo600);
+  --btn-fill-text: var(--white);
+  --btn-fill-hover: var(--indigo500);
+}
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: "Host Grotesk", sans-serif;
+  font-size: 1rem;
+}
+
+h1 {
+  font-size: 2.5rem;
+  font-weight: 800;
+  color: var(--title);
+}
+
+a {
+  text-decoration: underline;
+  color: var(--link);
+}
+
+.btn {
+  padding: 0.5em 1em;
+  font-size: 0.9rem;
+  font-weight: 300;
+  border-radius: 0.5em;
+  text-transform: capitalize;
+  text-decoration: none;
+  background-color: var(--btn);
+  color: var(--btn-text);
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: 0.2s;
+}
+.btn.btn-fill {
+  background-color: var(--btn-fill);
+  color: var(--btn-fill-text);
+}
+.btn.btn-fill:active, .btn.btn-fill:focus, .btn.btn-fill:hover {
+  background-color: var(--btn-fill-hover);
+}
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: unset;
+  align-items: center;
+  gap: 2em;
+  min-height: 100vh;
+  padding: 1em;
+  background-color: var(--indigo100);
+}
+
+.block {
+  display: flex;
+  flex-direction: column;
+  justify-content: unset;
+  align-items: flex-start;
+  gap: 1em;
+  padding: 3em;
+  border-radius: 1em;
+  background-color: var(--white);
+}
+
+.msg {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5em;
+  padding: 0.25em 1em;
+  font-size: 0.9rem;
+  font-weight: 600;
+  border-radius: 3em;
+  background-color: var(--msg);
+  color: var(--msg-text);
+}
+.msg p, .msg a {
+  font-size: 0.9rem;
+  color: var(--msg-text);
+}
+.msg.msg-err {
+  background-color: var(--msg-err);
+  color: var(--msg-err-text);
+}
+.msg.msg-err p, .msg.msg-err a {
+  color: var(--white);
+}
+.msg.msg-ok {
+  background-color: var(--msg-ok);
+  color: var(--msg-ok-text);
+}
+.msg.msg-ok p, .msg.msg-ok a {
+  color: var(--white);
+}
+
+:root {
+  --bg-gradient: linear-gradient(235deg, var(--indigo300) 0, var(--indigo500) 100%);
+  --bg: var(--white);
+  --input-border: var(--indigo200);
+  --input-focus: var(--indigo50);
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 0;
+  width: 100vw;
+  height: 100vh;
+  background: var(--bg-gradient);
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5em;
+  padding: 2em;
+  border-radius: 0.5em;
+  background-color: var(--bg);
+}
+form .field {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 0.1em;
+  width: 100%;
+}
+form .field label {
+  display: block;
+  width: 100%;
+  font-weight: bold;
+  text-transform: capitalize;
+}
+form .field input {
+  display: block;
+  width: 100%;
+  padding: 0.5em;
+  border-radius: 0.25em;
+  border: 1px solid var(--input-border);
+  transition: 0.2s;
+}
+form .field input:active, form .field input:focus, form .field input:hover {
+  background-color: var(--input-focus);
+}
+form .links {
+  display: flex;
+  flex-direction: column;
+  justify-content: unset;
+  align-items: center;
+  gap: 0.1em;
+}
+form .links ul {
+  list-style-type: none;
+}
+form .links ul li {
+  text-align: center;
+}/*# sourceMappingURL=signin.css.map */

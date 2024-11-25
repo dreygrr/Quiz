@@ -1,0 +1,58 @@
+@import "main";
+
+:root {
+    --bg-gradient: linear-gradient(235deg, var(--indigo300) 0, var(--indigo500) 100%);
+
+    --bg: var(--white);
+    --input-border: var(--indigo200);
+    --input-focus: var(--indigo50);
+}
+
+
+
+body {
+    @include doFlex(column, center, center, 0);
+
+    width: 100vw; height: 100vh;
+    background: var(--bg-gradient);
+}
+
+
+
+form {
+    @include doFlex(column, center, center, .5em);
+    padding: 2em;
+    border-radius: .5em;
+    background-color: var(--bg);
+
+    .field {
+        @include doFlex(column, center, center, .1em);
+        width: 100%;
+
+        label {
+            display: block;
+            width: 100%;
+            font-weight: bold;
+            text-transform: capitalize;
+        }
+
+        input {
+            display: block;
+            width: 100%;
+            padding: .5em;
+            border-radius: .25em;
+            border: 1px solid var(--input-border);
+            transition: .2s;
+
+            &:active, &:focus, &:hover {
+                background-color: var(--input-focus);
+            }
+        }
+    }
+
+    .links {
+        @include doFlex(column, unset, center, .1em);
+
+        ul {list-style-type: none; li {text-align: center;}}
+    }
+}

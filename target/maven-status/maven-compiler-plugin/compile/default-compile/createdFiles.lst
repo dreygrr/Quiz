@@ -1,0 +1,4 @@
+controller\ProfilePictureServlet.class
+controller\LoginController.class
+controller\CadastroController.class
+model\User.class

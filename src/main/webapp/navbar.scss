@@ -1,0 +1,67 @@
+@import "main";
+
+:root {
+    --bg: var(--indigo900);
+    --item-bg: var(--indigo700);
+    --item-hover: var(--indigo600);
+
+    --user-ppic-gradient: linear-gradient(235deg, var(--emerald400) 0, var(--indigo400) 100%);
+}
+
+
+
+nav {
+    @include doFlex(row, space-between, center, unset);
+    padding: .5em 1em;
+
+    background-color: var(--bg);
+    color: var(--white);
+
+    h1.props-logo {
+        font-size: 3rem; font-weight: 900; font-style: italic;
+        letter-spacing: -.15rem;
+        transform: scaleY(.85);
+        color: var(--white);
+    }
+
+    ul {
+        @include doFlex(row, flex-end, center, 1em);
+        list-style-type: none;
+
+        li {
+            @include doFlex(row, center, center, 0);
+            // text-transform: capitalize;
+            font-weight: 300;
+            letter-spacing: .05rem;
+
+            a {
+                @include doFlex(row, center, center, 0);
+                min-width: 50px; max-width: 50px;
+                min-height: 50px; max-height: 50px;
+                // padding: .5em 1em;
+                border-radius: .5em;
+                transition: .2s;
+
+                background-color: var(--item-bg);
+
+                &:focus, &:active, &:hover {
+                    background-color: var(--item-hover);
+                }
+
+                .user-ppic {
+                    display: block;
+                    min-width: calc(50px - 1em); max-width: calc(50px - 1em);
+                    min-height: calc(50px - 1em); max-height: calc(50px - 1em);
+                    border-radius: 100%;
+                    
+                    background-image: var(--profile-url); background-size: 100%; background-position: center;
+                }
+            }
+        }
+    }
+
+    a {
+        color: var(--white);
+        text-decoration: none;
+    }
+}

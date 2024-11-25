@@ -16,6 +16,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import model.User;
+import org.mindrot.jbcrypt.BCrypt;
 
 @WebServlet(name = "LoginController", urlPatterns = {"/LoginController"})
 public class LoginController extends HttpServlet {
@@ -38,68 +39,68 @@ public class LoginController extends HttpServlet {
     try {
       Class.forName("com.mysql.cj.jdbc.Driver");
       Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/quizzando?useSSL=false&serverTimezone=America/Sao_Paulo", "root", "");
-      
-      String query = "SELECT nome, apelido, entrou_em FROM usuarios WHERE apelido = ? AND senha = ?;";
 
-      try (PreparedStatement stt = con.prepareStatement(query)) {
-        stt.setString(1, apelido);
-        stt.setString(2, senha);
+      if (passwordMatches(con, apelido, senha)) {
+        String query = "SELECT nome, apelido, entrou_em FROM usuarios WHERE apelido = ?;";
 
-        try (ResultSet rs = stt.executeQuery()) {
-          
-          if (rs.next()) {
-            User user = new User(rs.getString("nome"), rs.getString("apelido"), rs.getString("entrou_em"));
-            
-            HttpSession session = request.getSession();
-            
-            session.setAttribute("_user", user);
+        try (PreparedStatement stt = con.prepareStatement(query)) {
+          stt.setString(1, apelido);
 
-            response.sendRedirect("/Quiz/dashboard/");
-          } else {
-            request.getSession().setAttribute("wrongCredentials", true);
-            response.sendRedirect("/Quiz/signin/");
+          try (ResultSet rs = stt.executeQuery()) {
+
+            if (rs.next()) {
+              User user = new User(rs.getString("nome"), rs.getString("apelido"), rs.getString("entrou_em"));
+
+              HttpSession session = request.getSession();
+
+              session.setAttribute("_user", user);
+
+              response.sendRedirect("/Quiz/dashboard/");
+            } else {
+              request.getSession().setAttribute("wrongCredentials", true);
+              response.sendRedirect("/Quiz/signin/");
+            }
           }
+        } catch (SQLException e) {
+          e.printStackTrace();
+          response.getWriter().println("erro ao conectar ao banco" + e.getMessage());
+          response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
         }
+      } else {
+        request.getSession().setAttribute("wrongCredentials", true);
+        response.sendRedirect("/Quiz/signin/");
       }
     } catch (ClassNotFoundException e) {
       e.printStackTrace();
+      response.getWriter().println("erro no driver" + e.getMessage());
     } catch (SQLException e) {
+      response.getWriter().println("erro na conexão do driver ao banco" + e.getMessage());
+    }
+  }
+  
+  
+  
+  private boolean passwordMatches(Connection con, String apelido, String senha) {
+    try {
+      Class.forName("com.mysql.cj.jdbc.Driver");
+      
+      String query = "SELECT senha FROM usuarios WHERE apelido = ?;";
+      
+      try (PreparedStatement stt = con.prepareStatement(query)) {
+        stt.setString(1, apelido);
+        
+        try (ResultSet rs = stt.executeQuery()) {
+          if (rs.next()) {
+            String hashedSenha = rs.getString("senha");
+            
+            if (BCrypt.checkpw(senha, hashedSenha)) return true;
+          }
+        }
+      }
+    } catch (ClassNotFoundException | SQLException e) {
       e.printStackTrace();
-      response.getWriter().println("erro ao conectar ao banco" + e.getMessage());
-      response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
     }
     
-
-    // try (Connection con = DriverManager.getConnection("jdbc:mysql://localhost/quizzando", "root", "")) {
-    //   System.out.println("Conexão com o banco de dados estabelecida!");
-
-    //   String query = "SELECT nome, apelido FROM usuarios WHERE apelido = ? AND senha = ?";
-
-    //   try (PreparedStatement stt = con.prepareStatement(query)) {
-    //     stt.setString(1, apelido);
-    //     stt.setString(2, senha);
-
-    //     try (ResultSet rs = stt.executeQuery()) {
-
-    //       if (rs.next()) {
-    //         System.out.println("Usuário encontrado!");
-
-    //         User user = new User(rs.getString("nome"), rs.getString("apelido"));
-    //         HttpSession session = request.getSession();
-    //         session.setAttribute("_user", user);
-
-    //         response.sendRedirect("./../dashboard/");
-    //       } else {
-    //         System.out.println("Credenciais inválidas.");
-
-    //         request.getSession().setAttribute("wrongCredentials", true);
-    //         response.sendRedirect("./signinpage.jsp");
-    //       }
-    //     }
-    //   }
-    // } catch (SQLException e) {
-    //   e.printStackTrace();
-    //   response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Erro ao conectar ao banco de dados." + e.getMessage());
-    // }
+    return false;
   }
 }

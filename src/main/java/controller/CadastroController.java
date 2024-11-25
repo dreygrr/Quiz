@@ -17,6 +17,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
+import org.mindrot.jbcrypt.BCrypt;
 
 @WebServlet(name = "CadastroController", urlPatterns = {"/CadastroController"})
 @MultipartConfig
@@ -39,6 +40,8 @@ public class CadastroController extends HttpServlet {
     InputStream fotoInputStream = fotoPart.getInputStream();
     byte[] fotoBytes = fotoInputStream.readAllBytes();
     
+    String hashedSenha = BCrypt.hashpw(senha, BCrypt.gensalt());
+    
     try {
       // Conectar ao banco de dados
       Class.forName("com.mysql.cj.jdbc.Driver");
@@ -54,7 +57,7 @@ public class CadastroController extends HttpServlet {
         try (PreparedStatement stt = con.prepareStatement(query)) {
           stt.setString(1, nome);
           stt.setString(2, apelido);
-          stt.setString(3, senha);
+          stt.setString(3, hashedSenha);
           stt.setTimestamp(4, new Timestamp(System.currentTimeMillis()));
           stt.setBytes(5, fotoBytes); // Adiciona os bytes da imagem
 

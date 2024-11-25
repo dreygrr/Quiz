@@ -5,6 +5,7 @@
 
   <ul>
     <li><a href="../home/"><i class="fa-solid fa-house"></i></a></li>
+    <li><a href="#"><i class="fa-solid fa-ranking-star"></i></a></li>
     
     <c:choose>
       <c:when test="${not empty sessionScope._user}">

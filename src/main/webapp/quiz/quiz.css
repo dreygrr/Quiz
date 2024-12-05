@@ -816,8 +816,15 @@ footer .copyright {
   background-color: var(--white);
   border-radius: 0.5em;
 }
-.question-container .form-container .score-header {
+.question-container .form-container .question-headers {
+  display: flex;
+  flex-direction: row;
+  justify-content: stretch;
+  align-items: stretch;
+  gap: 0.5em;
   width: 100%;
+}
+.question-container .form-container .question-headers h5 {
   padding: 0.25em;
   border-radius: 0.25em;
   font-size: 0.75rem;
@@ -826,8 +833,12 @@ footer .copyright {
   background-color: var(--score-header-bg);
   color: var(--score-header-txt);
 }
-.question-container .form-container .score-header b, .question-container .form-container .score-header b i {
+.question-container .form-container .question-headers h5 b, .question-container .form-container .question-headers h5 b i {
   font-size: 0.75rem;
+}
+.question-container .form-container .question-headers h5:first-of-type {
+  width: -moz-max-content;
+  width: max-content;
 }
 .question-container .form-container .quiz-result {
   width: 100%;

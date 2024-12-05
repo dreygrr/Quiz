@@ -5,6 +5,7 @@
 <nav>
   <ul>
     <li><a href="${pageContext.request.contextPath}/home/"><i class="fa-solid fa-house"></i></a></li>
+    <li><a href="${pageContext.request.contextPath}/home/homepage.jsp#initQuiz"><i class="fa-solid fa-brain"></i></a></li>
     <li><a href="#"><i class="fa-solid fa-ranking-star"></i></a></li>
     
     <c:choose>

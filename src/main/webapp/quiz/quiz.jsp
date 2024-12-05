@@ -50,18 +50,21 @@
   <div class="question-container block">
     <div class="form-container">
       <c:if test="${not empty sessionScope._user}">
-        <h5 class="score-header"><b><i class="fa-solid fa-star"></i> ${score}</b> &mdash; ${difficulty}</h5>
+        <div class="question-headers">
+          <h5 class="category-header"><b><i class="fa-solid fa-book"></i></b> ${currentQuestion.category}</h5>
+          <h5 class="score-header"><b><i class="fa-solid fa-star"></i> ${currentQuestion.points}</b> &mdash; ${currentQuestion.difficulty}</h5>
+        </div>
       </c:if>
       
       <h4>Pergunta:</h4>
       
-      <h3>${question}</h3>
+      <h3>${currentQuestion.question}</h3>
             
       <form action="${pageContext.request.contextPath}/QuizController" method="post">
         <input type="hidden" name="action" value="answer">
           
         <div class="fields">
-          <c:forEach var="answer" items="${answers}">
+          <c:forEach var="answer" items="${currentQuestion.allAnswersShuffled}">
             <div class="field ${userAnswer == answer ? "userAnswer" : ""}">
               <input 
                 id="${answer}Id" 
@@ -81,15 +84,16 @@
         </div>
         
         <c:if test="${not empty result}">
-          <p class="quiz-result ${correctAnswer == userAnswer ? "hit" : "miss"}">
+          <p class="quiz-result ${currentQuestion.correctAnswer == userAnswer ? "hit" : "miss"}">
             <c:choose>
-              <c:when test="${correctAnswer == userAnswer}">
+              <c:when test="${currentQuestion.correctAnswer == userAnswer}">
                 <i class="fa-regular fa-check result-icon"></i>
               </c:when>
               <c:otherwise>
                 <i class="fa-regular fa-times result-icon"></i>
               </c:otherwise>
             </c:choose>
+                
             <b>${result}</b>
           </p>
         </c:if>

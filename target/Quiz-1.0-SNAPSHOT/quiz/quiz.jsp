@@ -49,26 +49,52 @@
 <body>
   <div class="question-container block">
     <div class="form-container">
+      <c:if test="${not empty sessionScope._user}">
+        <h5 class="score-header"><b><i class="fa-solid fa-star"></i> ${score}</b> &mdash; ${difficulty}</h5>
+      </c:if>
+      
+      <h4>Pergunta:</h4>
+      
+      <h3>${question}</h3>
+            
       <form action="${pageContext.request.contextPath}/QuizController" method="post">
-        <h4>Pergunta:</h4>
-        <h3>${question}</h3>
-
         <input type="hidden" name="action" value="answer">
-        
-        <c:if test="${not empty result}">
-          <p class="quiz-result"><b>${result}</b></p>
-        </c:if>
           
         <div class="fields">
           <c:forEach var="answer" items="${answers}">
-            <div class="field">
-              <input id="${answer}Id" type="radio" name="answer" value="${answer}" required>
+            <div class="field ${userAnswer == answer ? "userAnswer" : ""}">
+              <input 
+                id="${answer}Id" 
+                type="radio" name="answer" 
+                value="${answer}"
+                <c:if test="${not empty userAnswer}">
+                  disabled
+                </c:if>
+                <c:if test="${userAnswer == answer}">
+                  checked
+                </c:if>
+                required
+                />
               <label for="${answer}Id">${answer}</label>
             </div>
           </c:forEach>
         </div>
+        
+        <c:if test="${not empty result}">
+          <p class="quiz-result ${correctAnswer == userAnswer ? "hit" : "miss"}">
+            <c:choose>
+              <c:when test="${correctAnswer == userAnswer}">
+                <i class="fa-regular fa-check result-icon"></i>
+              </c:when>
+              <c:otherwise>
+                <i class="fa-regular fa-times result-icon"></i>
+              </c:otherwise>
+            </c:choose>
+            <b>${result}</b>
+          </p>
+        </c:if>
 
-        <button class="btn full fill responder" type="submit">
+        <button class="btn full fill responder ${not empty result ? "disabled" : ""}" ${not empty result ? "disabled" : ""} type="submit">
           <span>Responder</span>
           <i class="fa-regular fa-arrow-right"></i>
         </button>

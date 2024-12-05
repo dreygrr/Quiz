@@ -66,6 +66,7 @@
   --btn-fill-txt: var(--white);
   --btn-fill-hover: var(--indigo700);
   --btn-disabled-bg: var(--zinc400);
+  --btn-disabled-bg-hover: var(--zinc300);
   --btn-disabled-txt: var(--zinc700);
   --btn-disabled-border: var(--zinc950);
   --main-current-spacing: .75em;
@@ -155,6 +156,9 @@ a {
   color: var(--btn-disabled-txt);
   border-color: var(--btn-disabled-border);
   cursor: not-allowed;
+}
+.btn.disabled:active, .btn.disabled:focus, .btn.disabled:hover {
+  background-color: var(--btn-disabled-bg-hover);
 }
 
 .wrapper {
@@ -276,6 +280,7 @@ a {
   --btn-fill-txt: var(--white);
   --btn-fill-hover: var(--indigo700);
   --btn-disabled-bg: var(--zinc400);
+  --btn-disabled-bg-hover: var(--zinc300);
   --btn-disabled-txt: var(--zinc700);
   --btn-disabled-border: var(--zinc950);
   --main-current-spacing: .75em;
@@ -365,6 +370,9 @@ a {
   color: var(--btn-disabled-txt);
   border-color: var(--btn-disabled-border);
   cursor: not-allowed;
+}
+.btn.disabled:active, .btn.disabled:focus, .btn.disabled:hover {
+  background-color: var(--btn-disabled-bg-hover);
 }
 
 .wrapper {
@@ -572,6 +580,7 @@ nav a {
   --btn-fill-txt: var(--white);
   --btn-fill-hover: var(--indigo700);
   --btn-disabled-bg: var(--zinc400);
+  --btn-disabled-bg-hover: var(--zinc300);
   --btn-disabled-txt: var(--zinc700);
   --btn-disabled-border: var(--zinc950);
   --main-current-spacing: .75em;
@@ -661,6 +670,9 @@ a {
   color: var(--btn-disabled-txt);
   border-color: var(--btn-disabled-border);
   cursor: not-allowed;
+}
+.btn.disabled:active, .btn.disabled:focus, .btn.disabled:hover {
+  background-color: var(--btn-disabled-bg-hover);
 }
 
 .wrapper {

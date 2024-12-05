@@ -39,6 +39,8 @@ public class QuizController extends HttpServlet {
     if ("answer".equals(action)) {
       String userAnswer = request.getParameter("answer");
       String correctAnswer = (String) request.getSession().getAttribute("correctAnswer");
+      String score = (String) request.getSession().getAttribute("score");
+      String difficulty = (String) request.getSession().getAttribute("difficulty");
 
       // Verificar a resposta
       if (userAnswer != null && userAnswer.equals(correctAnswer)) {
@@ -46,6 +48,18 @@ public class QuizController extends HttpServlet {
       } else {
         request.setAttribute("result", "Incorreto. A resposta correta era: " + correctAnswer);
       }
+      
+      // Recuperar os dados da pergunta da sessão
+      String question = (String) request.getSession().getAttribute("currentQuestion");
+      List<String> allAnswers = (List<String>) request.getSession().getAttribute("currentAnswers");
+
+      // Passar os dados para o JSP
+      request.setAttribute("question", question);
+      request.setAttribute("answers", allAnswers);
+      request.setAttribute("userAnswer", userAnswer);
+      request.setAttribute("correctAnswer", correctAnswer);
+      request.setAttribute("score", score);
+      request.setAttribute("difficulty", difficulty);
 
       // Exibir o resultado na página do quiz
       request.getRequestDispatcher("./quiz/quiz.jsp").forward(request, response);
@@ -80,6 +94,7 @@ public class QuizController extends HttpServlet {
       JSONObject questionData = results.getJSONObject(0);
 
       // Dados da pergunta
+      String difficulty = questionData.getString("difficulty");
       String question = questionData.getString("question");
       String correctAnswer = questionData.getString("correct_answer");
       JSONArray incorrectAnswers = questionData.getJSONArray("incorrect_answers");
@@ -89,15 +104,10 @@ public class QuizController extends HttpServlet {
       for (int i = 0; i < incorrectAnswers.length(); i++) {
         allAnswers.add(incorrectAnswers.getString(i));
       }
-      allAnswers.add(correctAnswer);
-
       
-      // Combinar as respostas (certa e erradas)
-      /*
-      JSONArray allAnswers = new JSONArray(incorrectAnswers.toList());
-      allAnswers.put(correctAnswer);
-      */
-
+      allAnswers.add(correctAnswer);
+      String score = getQuestionPoints(difficulty);
+      
       // Embaralhar as respostas
       java.util.Collections.shuffle(allAnswers);
 
@@ -105,7 +115,14 @@ public class QuizController extends HttpServlet {
       request.setAttribute("question", question);
       request.setAttribute("answers", allAnswers);
       request.setAttribute("correctAnswer", correctAnswer);
+      request.setAttribute("score", score);
+      request.setAttribute("difficulty", difficulty);
+      
+      request.getSession().setAttribute("currentQuestion", question);
+      request.getSession().setAttribute("currentAnswers", allAnswers);
       request.getSession().setAttribute("correctAnswer", correctAnswer);
+      request.getSession().setAttribute("score", score);
+      request.getSession().setAttribute("difficulty", difficulty);
 
       // Redirecionar para o JSP
       request.getRequestDispatcher("./quiz/quiz.jsp").forward(request, response);
@@ -114,5 +131,21 @@ public class QuizController extends HttpServlet {
       e.printStackTrace();
       response.getWriter().println("Erro ao carregar a pergunta: " + e.getMessage());
     }
+  }
+
+  
+  
+  private String getQuestionPoints(String difficulty) {
+    String points = "0";
+    
+    switch (difficulty) {
+      case "easy" -> points = "3";
+        
+      case "medium" -> points = "6";
+      
+      case "hard" -> points = "10";
+    }
+    
+    return points;
   }
 }

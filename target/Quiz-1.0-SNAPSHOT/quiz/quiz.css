@@ -66,6 +66,7 @@
   --btn-fill-txt: var(--white);
   --btn-fill-hover: var(--indigo700);
   --btn-disabled-bg: var(--zinc400);
+  --btn-disabled-bg-hover: var(--zinc300);
   --btn-disabled-txt: var(--zinc700);
   --btn-disabled-border: var(--zinc950);
   --main-current-spacing: .75em;
@@ -155,6 +156,9 @@ a {
   color: var(--btn-disabled-txt);
   border-color: var(--btn-disabled-border);
   cursor: not-allowed;
+}
+.btn.disabled:active, .btn.disabled:focus, .btn.disabled:hover {
+  background-color: var(--btn-disabled-bg-hover);
 }
 
 .wrapper {
@@ -276,6 +280,7 @@ a {
   --btn-fill-txt: var(--white);
   --btn-fill-hover: var(--indigo700);
   --btn-disabled-bg: var(--zinc400);
+  --btn-disabled-bg-hover: var(--zinc300);
   --btn-disabled-txt: var(--zinc700);
   --btn-disabled-border: var(--zinc950);
   --main-current-spacing: .75em;
@@ -365,6 +370,9 @@ a {
   color: var(--btn-disabled-txt);
   border-color: var(--btn-disabled-border);
   cursor: not-allowed;
+}
+.btn.disabled:active, .btn.disabled:focus, .btn.disabled:hover {
+  background-color: var(--btn-disabled-bg-hover);
 }
 
 .wrapper {
@@ -572,6 +580,7 @@ nav a {
   --btn-fill-txt: var(--white);
   --btn-fill-hover: var(--indigo700);
   --btn-disabled-bg: var(--zinc400);
+  --btn-disabled-bg-hover: var(--zinc300);
   --btn-disabled-txt: var(--zinc700);
   --btn-disabled-border: var(--zinc950);
   --main-current-spacing: .75em;
@@ -661,6 +670,9 @@ a {
   color: var(--btn-disabled-txt);
   border-color: var(--btn-disabled-border);
   cursor: not-allowed;
+}
+.btn.disabled:active, .btn.disabled:focus, .btn.disabled:hover {
+  background-color: var(--btn-disabled-bg-hover);
 }
 
 .wrapper {
@@ -774,6 +786,15 @@ footer .copyright {
 
 .question-container {
   --bg: var(--indigo500);
+  --score-header-bg: var(--indigo200);
+  --score-header-txt: var(--indigo600);
+  --user-answer-bg: var(--indigo200);
+  --result-bg: var(--indigo300);
+  --result-txt: var(--indigo700);
+  --result-bg-hit: var(--emerald300);
+  --result-bg-hit-txt: var(--emerald700);
+  --result-bg-miss: var(--red300);
+  --result-bg-miss-txt: var(--red700);
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -795,6 +816,35 @@ footer .copyright {
   background-color: var(--white);
   border-radius: 0.5em;
 }
+.question-container .form-container .score-header {
+  width: 100%;
+  padding: 0.25em;
+  border-radius: 0.25em;
+  font-size: 0.75rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  background-color: var(--score-header-bg);
+  color: var(--score-header-txt);
+}
+.question-container .form-container .score-header b, .question-container .form-container .score-header b i {
+  font-size: 0.75rem;
+}
+.question-container .form-container .quiz-result {
+  width: 100%;
+  padding: 0.5em;
+  margin-top: 0.5em;
+  border-radius: 0.5em;
+  background-color: var(--result-bg);
+  color: var(--result-txt);
+}
+.question-container .form-container .quiz-result.hit {
+  background-color: var(--result-bg-hit);
+  color: var(--result-bg-hit-txt);
+}
+.question-container .form-container .quiz-result.miss {
+  background-color: var(--result-bg-miss);
+  color: var(--result-bg-miss-txt);
+}
 .question-container .form-container form {
   display: flex;
   flex-direction: column;
@@ -808,7 +858,24 @@ footer .copyright {
   flex-direction: column;
   justify-content: start;
   align-items: start;
-  gap: 0.5em;
+  gap: 0;
   width: 100%;
   margin: 0.5em 0;
+}
+.question-container .form-container form .fields .field {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5em;
+  width: 100%;
+  padding: 0.5em;
+  border-radius: 0.5em;
+}
+.question-container .form-container form .fields .field label {
+  display: block;
+  width: 100%;
+}
+.question-container .form-container form .fields .field.userAnswer {
+  background-color: var(--user-answer-bg);
 }/*# sourceMappingURL=quiz.css.map */

@@ -1,48 +1,57 @@
 @import "main";
 
-:root {
-    --bg: var(--indigo900);
-    --item-bg: var(--indigo700);
-    --item-hover: var(--indigo600);
-
-    --user-ppic-gradient: linear-gradient(235deg, var(--emerald400) 0, var(--indigo400) 100%);
+.nav-hitbox {
+    display: block;
+    width: 100%; height: var(--nav-current-hitbox);
+    
+    background-color: var(--indigo200);
 }
 
-
-
 nav {
+    // --bg: var(--indigo900);
+    // --item-bg: var(--indigo600);
+    // --item-hover: var(--indigo500);
+
+    --bg: rgb(255, 255, 255, .3);
+    --border: var(--zinc400);
+    --item-bg: rgb(255, 255, 255, .5);
+    --item-border: var(--border);
+    --item-txt: var(--zinc950);
+    --item-hover: var(--white);
+
+    --user-ppic-gradient: linear-gradient(235deg, var(--emerald400) 0, var(--indigo400) 100%);
+
     @include doFlex(row, space-between, center, unset);
-    padding: .5em 1em;
+    position: fixed;
+    top: 100%; left: 50%;
+    transform: translate(-50%, -100%);
+    width: 100%;
+    padding: var(--main-current-spacing);
 
+    border-top: 1px solid var(--border);
     background-color: var(--bg);
-    color: var(--white);
-
-    h1.props-logo {
-        font-size: 3rem; font-weight: 900; font-style: italic;
-        letter-spacing: -.15rem;
-        transform: scaleY(.85);
-        color: var(--white);
-    }
+    backdrop-filter: blur(5px);
+    color: var(--black);
 
     ul {
-        @include doFlex(row, flex-end, center, 1em);
+        @include doFlex(row, space-between, center, var(--main-current-spacing));
+        width: 100%;
         list-style-type: none;
 
         li {
             @include doFlex(row, center, center, 0);
-            // text-transform: capitalize;
+            width: 100%;
             font-weight: 300;
             letter-spacing: .05rem;
 
             a {
                 @include doFlex(row, center, center, 0);
-                min-width: 50px; max-width: 50px;
+                width: 100%;
                 min-height: 50px; max-height: 50px;
-                // padding: .5em 1em;
                 border-radius: .5em;
                 transition: .2s;
 
-                background-color: var(--item-bg);
+                background-color: var(--item-bg); color: var(--item-txt); border: 1px solid var(--item-border);
 
                 &:focus, &:active, &:hover {
                     background-color: var(--item-hover);

@@ -2,6 +2,17 @@
 :root {
   --white: #fff;
   --black: #000;
+  --zinc50: #fafafa;
+  --zinc100: #f4f4f5;
+  --zinc200: #e4e4e7;
+  --zinc300: #d4d4d4;
+  --zinc400: #a3a3a3;
+  --zinc500: #737373;
+  --zinc600: #525252;
+  --zinc700: #404040;
+  --zinc800: #262626;
+  --zinc900: #171717;
+  --zinc950: #09090b;
   --indigo50: #eef2ff;
   --indigo100: #e0e7ff;
   --indigo200: #c7d2fe;
@@ -38,16 +49,24 @@
   --title: var(--indigo950);
   --link: var(--indigo600);
   --msg: var(--indigo300);
-  --msg-text: var(--indigo900);
+  --msg-txt: var(--indigo900);
   --msg-err: var(--red600);
-  --msg-err-text: var(--white);
+  --msg-err-txt: var(--white);
   --msg-ok: var(--emerald700);
-  --msg-ok-text: var(--white);
-  --btn: var(--indigo300);
-  --btn-text: var(--indigo950);
+  --msg-ok-txt: var(--white);
+  --btn-basic: var(--indigo300);
+  --btn-basic-txt: var(--indigo950);
+  --btn-basic-dark: var(--zinc950);
+  --btn-basic-dark-txt: var(--white);
+  --btn-txt: var(--zinc950);
+  --btn-border: var(--zinc950);
   --btn-fill: var(--indigo600);
-  --btn-fill-text: var(--white);
-  --btn-fill-hover: var(--indigo500);
+  --btn-fill-txt: var(--white);
+  --btn-fill-hover: var(--indigo700);
+  --btn-disabled-bg: var(--zinc400);
+  --btn-disabled-txt: var(--zinc700);
+  --btn-disabled-border: var(--zinc950);
+  --main-current-spacing: .75em;
 }
 
 * {
@@ -64,30 +83,76 @@ h1 {
   color: var(--title);
 }
 
+h2 {
+  font-size: 1.75rem;
+  font-weight: 800;
+  color: var(--title);
+}
+
+h3 {
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: var(--title);
+}
+
 a {
   text-decoration: underline;
   color: var(--link);
 }
 
 .btn {
+  display: block;
   padding: 0.5em 1em;
   font-size: 0.9rem;
   font-weight: 300;
   border-radius: 0.5em;
+  text-align: center;
   text-transform: capitalize;
   text-decoration: none;
-  background-color: var(--btn);
-  color: var(--btn-text);
-  border: 1px solid transparent;
+  background-color: transparent;
+  color: var(--btn-txt);
+  border: 1px solid var(--btn-border);
   cursor: pointer;
   transition: 0.2s;
 }
-.btn.btn-fill {
-  background-color: var(--btn-fill);
-  color: var(--btn-fill-text);
+.btn a {
+  text-decoration: none;
 }
-.btn.btn-fill:active, .btn.btn-fill:focus, .btn.btn-fill:hover {
+.btn:active, .btn:focus, .btn:hover {
+  background-color: var(--btn-basic-dark);
+  color: var(--btn-basic-dark-txt);
+}
+.btn.full {
+  width: 100%;
+}
+.btn.fill {
+  background-color: var(--btn-fill);
+  color: var(--btn-fill-txt);
+  border-color: var(--btn-fill);
+}
+.btn.fill:active, .btn.fill:focus, .btn.fill:hover {
   background-color: var(--btn-fill-hover);
+}
+.btn.lightred {
+  border-color: var(--red400);
+  color: var(--red700);
+}
+.btn.lightred a {
+  color: var(--red700);
+}
+.btn.lightred:active, .btn.lightred:hover, .btn.lightred:focus {
+  background-color: var(--red400);
+  border-color: var(--red400);
+  color: var(--red800);
+}
+.btn.lightred:active a, .btn.lightred:hover a, .btn.lightred:focus a {
+  color: var(--red800);
+}
+.btn.disabled {
+  background-color: var(--btn-disabled-bg);
+  color: var(--btn-disabled-txt);
+  border-color: var(--btn-disabled-border);
+  cursor: not-allowed;
 }
 
 .wrapper {
@@ -97,8 +162,8 @@ a {
   align-items: center;
   gap: 2em;
   min-height: 100vh;
-  padding: 1em;
-  background-color: var(--indigo100);
+  padding: var(--main-current-spacing);
+  background-color: var(--white);
 }
 
 .block {
@@ -107,7 +172,7 @@ a {
   justify-content: unset;
   align-items: flex-start;
   gap: 1em;
-  padding: 3em;
+  padding: var(--main-current-spacing);
   border-radius: 1em;
   background-color: var(--white);
 }
@@ -123,22 +188,22 @@ a {
   font-weight: 600;
   border-radius: 3em;
   background-color: var(--msg);
-  color: var(--msg-text);
+  color: var(--msg-txt);
 }
 .msg p, .msg a {
   font-size: 0.9rem;
-  color: var(--msg-text);
+  color: var(--msg-txt);
 }
 .msg.msg-err {
   background-color: var(--msg-err);
-  color: var(--msg-err-text);
+  color: var(--msg-err-txt);
 }
 .msg.msg-err p, .msg.msg-err a {
   color: var(--white);
 }
 .msg.msg-ok {
   background-color: var(--msg-ok);
-  color: var(--msg-ok-text);
+  color: var(--msg-ok-txt);
 }
 .msg.msg-ok p, .msg.msg-ok a {
   color: var(--white);

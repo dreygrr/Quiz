@@ -1,16 +1,12 @@
 @import "main";
 
-:root {
+body {
     --bg-gradient: linear-gradient(235deg, var(--indigo300) 0, var(--indigo500) 100%);
 
     --bg: var(--white);
     --input-border: var(--indigo200);
     --input-focus: var(--indigo50);
-}
 
-
-
-body {
     @include doFlex(column, center, center, 0);
 
     width: 100vw; height: 100vh;

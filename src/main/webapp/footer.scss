@@ -1,0 +1,40 @@
+@import "main";
+
+footer {
+    --bg: var(--indigo200);
+    --txt: var(--indigo900);
+    --txt-hover: var(--indigo700);
+
+    @include doFlex(column, center, center, 1em);
+    padding: var(--main-current-spacing);
+
+    background-color: var(--bg); color: var(--txt);
+
+    h2.logo {
+        font-size: 1.5rem; font-weight: 600;
+    }
+
+    .sections {
+        @include doFlex(row, space-between, flex-start, 0);
+        width: 100%;
+
+        ul {
+            @include doFlex(column, start, start, .25em);
+            list-style-type: none;
+
+            h3 {font-size: 1.12rem; margin: .25em 0;}
+
+            li a {
+                color: var(--txt); text-decoration: none;
+
+                &:active, &:focus, &:hover {color: var(--txt-hover); text-decoration: underline;}
+            }
+        }
+    }
+
+    .copyright {
+        @include doFlex(column, center, center, .5em);
+        width: 100%;
+        text-align: center;
+    }
+}

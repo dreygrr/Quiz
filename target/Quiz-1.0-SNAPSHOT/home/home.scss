@@ -1,2 +1,13 @@
 @import "../main";
 @import "../navbar";
+@import "../footer";
+
+.home-landing {
+    --landing-gradient-bg: linear-gradient(45deg, var(--indigo600) 0, var(--white) 100%);
+
+    @include doFlex(column, center, center, 0);
+    height: 90vh;
+
+    background: var(--landing-gradient-bg);
+    color: var(--white);
+}

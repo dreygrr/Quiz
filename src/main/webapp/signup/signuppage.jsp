@@ -46,7 +46,7 @@
       <input type="password" name="senha" id="senhaId" required>
     </div>
 
-    <input class="btn btn-fill" type="submit" value="sign up">
+    <input class="btn full btn-fill" type="submit" value="sign up">
 
     <div class="links">
       <ul>

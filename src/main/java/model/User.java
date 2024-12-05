@@ -1,4 +1,8 @@
 package model;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 public class User {
   private String nome;
   private String apelido;
@@ -50,5 +54,23 @@ public class User {
   }
   public void setEntrouEm(String entrouEm) {
     this.entrouEm = entrouEm;
+  }
+  
+  public String getFormattedEntrouEm() {
+    String rawDate = this.entrouEm; // Exemplo: "2024-11-25 16:37:02"
+    
+    try {
+      // Converte a string original para um objeto Date
+      SimpleDateFormat originalFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+      Date date = originalFormat.parse(rawDate);
+
+      // Formata o objeto Date para o formato desejado
+      SimpleDateFormat desiredFormat = new SimpleDateFormat("dd/MM/yyyy");
+      
+      return desiredFormat.format(date);
+    } catch (Exception e) {
+        e.printStackTrace();
+        return rawDate; // Retorna a data original caso ocorra erro
+    }
   }
 }

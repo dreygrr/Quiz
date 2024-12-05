@@ -1,4 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@page import="model.User"%>
 <%@ taglib tagdir="/WEB-INF/tags" prefix="custom" %>
 <!DOCTYPE html>
@@ -13,52 +14,69 @@
   <title>Quizzando &bull; Painel</title>
 </head>
 <body>
-    <c:choose>
-      <c:when test="${not empty sessionScope._user}">
-        <c:set var="_user" value="${sessionScope._user}" />
-      </c:when>
+  <c:choose>
+    <c:when test="${not empty sessionScope._user}">
+      <c:set var="_user" value="${sessionScope._user}" />
+    </c:when>
 
-      <c:otherwise>
-        <c:set var="noAuth" value="true" scope="session" />
-        <c:redirect url="../signin/"/>
-      </c:otherwise>
-    </c:choose>
-    
-    <custom:navbar />
+    <c:otherwise>
+      <c:set var="noAuth" value="true" scope="session" />
+      <c:redirect url="../signin/"/>
+    </c:otherwise>
+  </c:choose>
 
-    <div class="wrapper dashboard-container">
-        <div class="block profile-about">
-            <div class="user-ppic" style="--profile-url: url('/Quiz/ProfilePicture?apelido=${_user.getApelido()}');"></div>
+  <div class="wrapper dashboard-container">
+    <div class="block profile-about">
+      <div class="user-ppic" style="--profile-url: url('/Quiz/ProfilePicture?apelido=${_user.getApelido()}');"></div>
 
-            <h1><c:out value="${_user.getNome()}" /></h1>
-            <h2><c:out value="${sessionScope._user.getApelido()}"/></h2>
+      <h1><c:out value="${_user.getNome()}" /></h1>
+      <h2>#<c:out value="${sessionScope._user.getApelido()}" /></h2>
 
-            <div class="profile-sections">
-                <div class="stats">
-                    <div class="stat account-age">
-                        <i class="fa-solid fa-calendar icon"></i>
-    
-                        <div class="content">
-                            <h4>Member since</h4>
-                            <h3><c:out value="${_user.getEntrouEm()}" /></h3>
-                        </div>
-                    </div>
-                </div>
+      <div class="profile-sections">
+        <div class="section stats">
+          <div class="stat account-age">
+            <i class="fa-solid fa-calendar icon"></i>
 
-                <div class="about">
-                    <h4>About me</h4>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptate sit dolorum explicabo quasi tempora commodi accusantium aspernatur voluptatibus quo quam officia qui nesciunt hic, perferendis enim excepturi recusandae praesentium architecto.</p>
-                </div>
-
-                <div class="info">
-                  <ul>
-                    <li><b>Fullname: </b>( - )</li>
-                    <li><b>Phone: </b>( - )</li>
-                    <li><b>E-mail: </b>( - )</li>
-                  </ul>
-                </div>
+            <div class="content">
+              <h4>Member since</h4>
+              <h3><c:out value="${_user.getFormattedEntrouEm()}" /></h3>
             </div>
+          </div>
+            
+          <div class="stat score">
+            <i class="fa-solid fa-star icon"></i>
+
+            <div class="content">
+              <h4>Score</h4>
+              <h3>20 pts.</h3>
+            </div>
+          </div>
+            
+          <div class="stat answers">
+            <i class="fa-solid fa-pencil icon"></i>
+
+            <div class="content">
+              <h4>Right answers</h4>
+              <h3>7</h3>
+            </div>
+          </div>
         </div>
+
+        <div class="section about">
+          <h4>Sobre mim</h4>
+          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptate sit dolorum explicabo quasi tempora commodi accusantium aspernatur voluptatibus quo quam officia qui nesciunt hic, perferendis enim excepturi recusandae praesentium architecto.</p>
+        </div>
+
+        <div class="section other-options">
+          <h4>Outras opções</h4>
+          
+          <a class="btn full lightred" href="signoutpage.jsp">Sair <i class="fa-regular fa-sign-out"></i></a>
+        </div>
+      </div>
     </div>
+  </div>
+  
+  <custom:footer />
+  <custom:navbar />
 </body>
 </html>

@@ -42,7 +42,7 @@
       <input type="password" name="senha" id="senhaId" required>
     </div>
 
-    <input class="btn btn-fill" type="submit" value="Entrar">
+    <input class="btn full btn-fill" type="submit" value="Entrar">
 
     <div class="links">
       <ul>

@@ -1,4 +1,5 @@
 controller\ProfilePictureServlet.class
 controller\LoginController.class
 controller\CadastroController.class
+controller\QuizController.class
 model\User.class

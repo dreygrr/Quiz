@@ -15,7 +15,11 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
 import model.Question;
+import model.QuestionDAO;
+import model.User;
+import model.UserDAO;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -44,41 +48,39 @@ public class QuizController extends HttpServlet {
     if ("answer".equals(action)) {
       Question currentQuestion = (Question) request.getSession().getAttribute("currentQuestion");
       String userAnswer = request.getParameter("answer");
-
-      if (currentQuestion != null) {
+      User user = (User) request.getSession().getAttribute("_user");
+      String pontuacaoTxt = "";
+      
+      if (currentQuestion != null) {        
         if (currentQuestion.isCorrect(userAnswer)) {
-          String pontuacaoTxt = "";
-          
-          if (request.getSession().getAttribute("_user") != null)
+          if (user != null) {
+            QuestionDAO questionDAO = new QuestionDAO();
+            UserDAO userDAO = new UserDAO();
+            
             pontuacaoTxt = "Você ganhou +" + currentQuestion.getPoints() + " pontos!";
-          
-          request.setAttribute("result", "Correto! " + pontuacaoTxt);
+
+            if (!questionDAO.questionExists(currentQuestion.getId())) questionDAO.saveQuestion(currentQuestion);
+            
+            questionDAO.saveUserResponse(userDAO.getUserId(user.getApelido()), currentQuestion.getId());
+            
+            // Calcular pontuação total
+            //int totalScore = questionDAO.calculateUserScore(userDAO.getUserId(user.getApelido()));
+            //request.getSession().setAttribute("totalScore", totalScore);
+          }
+
+          // Feedback
+          request.setAttribute("result", "Correto!" + pontuacaoTxt);
         } else {
           request.setAttribute("result", "Incorreto. A resposta correta era: " + currentQuestion.getCorrectAnswer());
         }
         
+        // Repassar dados para o JSP
         request.setAttribute("question", currentQuestion.getQuestion());
         request.setAttribute("answers", currentQuestion.getAllAnswersShuffled());
         request.setAttribute("userAnswer", userAnswer);
-
-        request.getRequestDispatcher("./quiz/quiz.jsp").forward(request, response);
-      } else {
-        response.sendRedirect("./home/index.jsp");
       }
       
-      /*
-      // Recuperar os dados da pergunta da sessão
-      String question = (String) request.getSession().getAttribute("currentQuestion");
-      List<String> allAnswers = (List<String>) request.getSession().getAttribute("currentAnswers");
-
-      // Passar os dados para o JSP
-      request.setAttribute("question", question);
-      request.setAttribute("answers", allAnswers);
-      request.setAttribute("userAnswer", userAnswer);
-      request.setAttribute("correctAnswer", correctAnswer);
-      request.setAttribute("score", score);
-      request.setAttribute("difficulty", difficulty);
-      */
+    request.getRequestDispatcher("./quiz/quiz.jsp").forward(request, response);
     }
   }
   

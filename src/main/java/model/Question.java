@@ -20,6 +20,10 @@ public class Question {
     this.correctAnswer = correctAnswer;
     this.incorrectAnswers = new ArrayList<>(incorrectAnswers); // Garantir cópia para evitar mutação externa
   }
+  
+  public String getId() {
+    return Integer.toHexString(question.hashCode());
+  }
 
   public String getQuestion() {
     return question;

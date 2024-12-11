@@ -112,4 +112,28 @@ public class UserDAO {
     
     return null;
   }
+  
+  public int countCorrectAnswers(String apelido) {
+    String query = """
+      SELECT COUNT(*) AS correct_count
+      FROM respostas r
+      INNER JOIN questoes q ON r.id_questao = q.id
+      INNER JOIN usuarios u ON r.id_usuario = u.id
+      WHERE u.apelido = ?;
+    """;
+    
+    try (Connection con = getConnection();
+      PreparedStatement stmt = con.prepareStatement(query)) {
+      
+      stmt.setString(1, apelido);
+      ResultSet rs = stmt.executeQuery();
+      
+      if (rs.next()) return rs.getInt("correct_count");
+      
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
+    
+    return 0;
+  }
 }

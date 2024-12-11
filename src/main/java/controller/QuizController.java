@@ -24,6 +24,8 @@ import model.UserDAO;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import org.apache.commons.lang.StringEscapeUtils;
+
 @WebServlet(name = "QuizController", urlPatterns = {"/QuizController"})
 public class QuizController extends HttpServlet {
 
@@ -64,12 +66,15 @@ public class QuizController extends HttpServlet {
             questionDAO.saveUserResponse(userDAO.getUserId(user.getApelido()), currentQuestion.getId());
             
             // Calcular pontuação total
-            //int totalScore = questionDAO.calculateUserScore(userDAO.getUserId(user.getApelido()));
-            //request.getSession().setAttribute("totalScore", totalScore);
+            int userTotalScore = questionDAO.calculateUserScore(user.getApelido());
+            int userAnswersCount = userDAO.countCorrectAnswers(user.getApelido());
+            
+            request.getSession().setAttribute("userTotalScore", userTotalScore);
+            request.getSession().setAttribute("userAnswersCount", userAnswersCount);
           }
 
           // Feedback
-          request.setAttribute("result", "Correto!" + pontuacaoTxt);
+          request.setAttribute("result", "Correto! " + pontuacaoTxt);
         } else {
           request.setAttribute("result", "Incorreto. A resposta correta era: " + currentQuestion.getCorrectAnswer());
         }
@@ -112,20 +117,15 @@ public class QuizController extends HttpServlet {
       JSONObject questionData = results.getJSONObject(0);
 
       // Criar a pergunta
-      String question = questionData.getString("question");
+      String question = StringEscapeUtils.unescapeHtml(questionData.getString("question"));
       String category = questionData.getString("category");
       String difficulty = questionData.getString("difficulty");
-      String correctAnswer = questionData.getString("correct_answer");
+      String correctAnswer = StringEscapeUtils.unescapeHtml(questionData.getString("correct_answer"));
       JSONArray incorrectAnswersJson = questionData.getJSONArray("incorrect_answers");
-      
-      /*List<String> allAnswers = new ArrayList<>();
-      for (int i = 0; i < incorrectAnswersJson.length(); i++) {
-        allAnswers.add(incorrectAnswersJson.getString(i));
-      }*/
       
       List<String> incorrectAnswers = new ArrayList<>();
       for (int i = 0; i < incorrectAnswersJson.length(); i++) {
-        incorrectAnswers.add(incorrectAnswersJson.getString(i));
+        incorrectAnswers.add(StringEscapeUtils.unescapeHtml(incorrectAnswersJson.getString(i)));
       }
       
       Question questionObj = new Question(question, category, difficulty, correctAnswer, incorrectAnswers);
@@ -133,49 +133,10 @@ public class QuizController extends HttpServlet {
       request.getSession().setAttribute("currentQuestion", questionObj);
       
       request.getRequestDispatcher("./quiz/quiz.jsp").forward(request, response);
-      
-      /*
-      incorrectAnswers.add(correctAnswer);
-      String score = getQuestionPoints(difficulty);
-      
-      // Embaralhar as respostas
-      java.util.Collections.shuffle(incorrectAnswers);
-
-      // Passar os dados para o JSP
-      request.setAttribute("question", question);
-      request.setAttribute("answers", incorrectAnswers);
-      request.setAttribute("correctAnswer", correctAnswer);
-      request.setAttribute("score", score);
-      request.setAttribute("difficulty", difficulty);
-      
-      request.getSession().setAttribute("currentQuestion", question);
-      request.getSession().setAttribute("currentAnswers", incorrectAnswers);
-      request.getSession().setAttribute("correctAnswer", correctAnswer);
-      request.getSession().setAttribute("score", score);
-      request.getSession().setAttribute("difficulty", difficulty);
-
-      // Redirecionar para o JSP
-      request.getRequestDispatcher("./quiz/quiz.jsp").forward(request, response);
-      */
+     
     } catch (Exception e) {
       e.printStackTrace();
       response.getWriter().println("Erro ao carregar a pergunta: " + e.getMessage());
     }
-  }
-
-  
-  
-  private String getQuestionPoints(String difficulty) {
-    String points = "0";
-    
-    switch (difficulty) {
-      case "easy" -> points = "3";
-        
-      case "medium" -> points = "6";
-      
-      case "hard" -> points = "10";
-    }
-    
-    return points;
   }
 }

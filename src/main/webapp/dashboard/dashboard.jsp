@@ -33,35 +33,6 @@
       <h2>#<c:out value="${sessionScope._user.getApelido()}" /></h2>
 
       <div class="profile-sections">
-        <div class="section stats">
-          <div class="stat account-age">
-            <i class="fa-solid fa-calendar icon"></i>
-
-            <div class="content">
-              <h4>Member since</h4>
-              <h3><c:out value="${_user.getFormattedEntrouEm()}" /></h3>
-            </div>
-          </div>
-            
-          <div class="stat score">
-            <i class="fa-solid fa-star icon"></i>
-
-            <div class="content">
-              <h4>Score</h4>
-              <h3>20 pts.</h3>
-            </div>
-          </div>
-            
-          <div class="stat answers">
-            <i class="fa-solid fa-pencil icon"></i>
-
-            <div class="content">
-              <h4>Right answers</h4>
-              <h3>7</h3>
-            </div>
-          </div>
-        </div>
-
         <div class="section about">
           <h4>Sobre mim</h4>
           <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptate sit dolorum explicabo quasi tempora commodi accusantium aspernatur voluptatibus quo quam officia qui nesciunt hic, perferendis enim excepturi recusandae praesentium architecto.</p>
@@ -71,6 +42,46 @@
           <h4>Outras opções</h4>
           
           <a class="btn full lightred" href="signoutpage.jsp">Sair <i class="fa-regular fa-sign-out"></i></a>
+        </div>
+      </div>
+    </div>
+            
+    <div class="block profile-stats">
+      <div class="section stats">
+        <div class="stat ranking">
+          <i class="fa-solid fa-ranking-star icon"></i>
+
+          <div class="content">
+            <h4>Ranking</h4>
+            <h3>#2</h3>
+          </div>
+        </div>
+          
+        <div class="stat score">
+          <i class="fa-solid fa-star icon"></i>
+
+          <div class="content">
+            <h4>Score</h4>
+            <h3>+${sessionScope.userTotalScore}</h3>
+          </div>
+        </div>
+
+        <div class="stat answers">
+          <i class="fa-solid fa-pencil icon"></i>
+
+          <div class="content">
+            <h4>Right answers</h4>
+            <h3>${sessionScope.userAnswersCount}</h3>
+          </div>
+        </div>
+
+        <div class="stat account-age">
+          <i class="fa-solid fa-calendar icon"></i>
+
+          <div class="content">
+            <h4>Member since</h4>
+            <h3><c:out value="${_user.getFormattedEntrouEm()}" /></h3>
+          </div>
         </div>
       </div>
     </div>

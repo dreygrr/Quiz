@@ -49,11 +49,13 @@
 <body>
   <div class="question-container block">
     <div class="form-container">
+      <div class="question-headers">
+        <h5 class="category-header"><b><i class="fa-solid fa-book"></i></b> ${currentQuestion.category}</h5>
+        <h5 class="score-header"><b><i class="fa-solid fa-star"></i> ${currentQuestion.points}</b> &mdash; ${currentQuestion.difficulty}</h5>
+      </div>
+      
       <c:if test="${not empty sessionScope._user}">
-        <div class="question-headers">
-          <h5 class="category-header"><b><i class="fa-solid fa-book"></i></b> ${currentQuestion.category}</h5>
-          <h5 class="score-header"><b><i class="fa-solid fa-star"></i> ${currentQuestion.points}</b> &mdash; ${currentQuestion.difficulty}</h5>
-        </div>
+        
       </c:if>
       
       <h4>Pergunta:</h4>
@@ -64,7 +66,7 @@
         <input type="hidden" name="action" value="answer">
           
         <div class="fields">
-          <c:forEach var="answer" items="${currentQuestion.allAnswersShuffled}">
+          <c:forEach var="answer" items="${currentQuestion.shuffledAnswers}">
             <div class="field ${userAnswer == answer ? "userAnswer" : ""}">
               <input 
                 id="${answer}Id" 

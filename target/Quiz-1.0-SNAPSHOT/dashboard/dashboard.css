@@ -105,6 +105,7 @@ a {
 
 .btn {
   display: block;
+  width: 100%;
   padding: 0.5em 1em;
   font-size: 0.9rem;
   font-weight: 300;
@@ -166,7 +167,7 @@ a {
   flex-direction: column;
   justify-content: unset;
   align-items: center;
-  gap: 2em;
+  gap: var(--main-current-spacing);
   min-height: 100vh;
   padding: var(--main-current-spacing);
   background-color: var(--white);
@@ -319,6 +320,7 @@ a {
 
 .btn {
   display: block;
+  width: 100%;
   padding: 0.5em 1em;
   font-size: 0.9rem;
   font-weight: 300;
@@ -380,7 +382,7 @@ a {
   flex-direction: column;
   justify-content: unset;
   align-items: center;
-  gap: 2em;
+  gap: var(--main-current-spacing);
   min-height: 100vh;
   padding: var(--main-current-spacing);
   background-color: var(--white);
@@ -619,6 +621,7 @@ a {
 
 .btn {
   display: block;
+  width: 100%;
   padding: 0.5em 1em;
   font-size: 0.9rem;
   font-weight: 300;
@@ -680,7 +683,7 @@ a {
   flex-direction: column;
   justify-content: unset;
   align-items: center;
-  gap: 2em;
+  gap: var(--main-current-spacing);
   min-height: 100vh;
   padding: var(--main-current-spacing);
   background-color: var(--white);
@@ -790,7 +793,6 @@ footer .copyright {
 
 .profile-about {
   --user-ppic-gradient: linear-gradient(235deg, var(--emerald400) 0, var(--indigo400) 100%);
-  --stat: var(--indigo200);
   align-items: center;
 }
 .profile-about .user-ppic {
@@ -821,7 +823,9 @@ footer .copyright {
   gap: 0.5em;
   width: 100%;
 }
-.profile-about .profile-sections .stats {
+
+.stats {
+  --stat: var(--indigo200);
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -829,7 +833,7 @@ footer .copyright {
   gap: 1em;
   flex-wrap: wrap;
 }
-.profile-about .profile-sections .stats .stat {
+.stats .stat {
   display: flex;
   flex-direction: row;
   justify-content: unset;
@@ -839,16 +843,16 @@ footer .copyright {
   border-radius: 0.5em;
   background-color: var(--stat);
 }
-.profile-about .profile-sections .stats .stat .icon {
+.stats .stat .icon {
   font-size: 2.5rem;
   mix-blend-mode: multiply;
   opacity: 0.25;
 }
-.profile-about .profile-sections .stats .stat .content h4 {
+.stats .stat .content h4 {
   font-size: 1rem;
   font-weight: bold;
 }
-.profile-about .profile-sections .stats .stat .content h3 {
+.stats .stat .content h3 {
   font-size: 1.12rem;
   font-weight: normal;
 }/*# sourceMappingURL=dashboard.css.map */

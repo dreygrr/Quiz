@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 06/12/2024 às 23:02
+-- Tempo de geração: 12/12/2024 às 00:49
 -- Versão do servidor: 10.4.28-MariaDB
 -- Versão do PHP: 8.2.4
 
@@ -36,6 +36,22 @@ CREATE TABLE `questoes` (
   `respostas_incorretas` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Despejando dados para a tabela `questoes`
+--
+
+INSERT INTO `questoes` (`id`, `questao`, `categoria`, `dificuldade`, `resposta_correta`, `respostas_incorretas`) VALUES
+('14031ecf', 'Which of these songs does NOT play during the Ruins segments of the 2015 game &quot;Undertale&quot;?', 'Entertainment: Video Games', 'medium', 'Another Medium', 'Anticipation;Unnecessary Tension;Ruins'),
+('2258126e', 'What ability does Princess Sofia the First have from her amulet that allows her to breathe underwater?', 'Entertainment: Cartoon &amp; Animations', 'medium', 'Mermaid Transformation', 'Artificial Gills;Bubble Head;Bubble Shield'),
+('4a63b755', 'What was the first ever entry written for the SCP Foundation collaborative writing project?', 'Entertainment: Books', 'easy', 'SCP-173', 'SCP-001;SCP-999;SCP-1459'),
+('5ab9f055', 'What is the oldest team in Major League Baseball?', 'Sports', 'medium', 'Atlanta Braves', 'Chicago Cubs;Cincinnati Reds;St. Louis Cardinals'),
+('7d5cebcc', 'In what year was the M1911 pistol designed?', 'History', 'easy', '1911', '1907;1899;1917'),
+('8de1d124', 'Arcade Fire&#039;s &#039;The Suburbs&#039; won the Album of the Year award in the 2011 Grammys.', 'Entertainment: Music', 'medium', 'True', 'False'),
+('96e6b320', 'In Portal 2, the iconic character GLaDOS is turned into:', 'Entertainment: Video Games', 'medium', 'A potato', 'A tomato;A lemon;An apple'),
+('983c6d75', 'Which survivor in Left 4 Dead sacrificed themself to save the other survivors?', 'Entertainment: Video Games', 'medium', 'Bill', 'Louis;Francis;Zoey'),
+('a58310ae', 'Time on Computers is measured via the EPOX System.', 'Science: Computers', 'easy', 'False', 'True'),
+('dba73a65', 'How many notes are there on a standard grand piano?', 'General Knowledge', 'hard', '88', '98;108;78');
+
 -- --------------------------------------------------------
 
 --
@@ -45,8 +61,27 @@ CREATE TABLE `questoes` (
 CREATE TABLE `respostas` (
   `id_usuario` int(11) NOT NULL,
   `id_questao` varchar(255) NOT NULL,
-  `respondeu_em` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+  `respondeu_em` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Despejando dados para a tabela `respostas`
+--
+
+INSERT INTO `respostas` (`id_usuario`, `id_questao`, `respondeu_em`, `id`) VALUES
+(5, '96e6b320', '2024-12-09 02:52:45', 1),
+(5, '14031ecf', '2024-12-09 02:53:49', 2),
+(6, '5ab9f055', '2024-12-09 02:54:41', 3),
+(5, '8de1d124', '2024-12-11 19:45:14', 4),
+(5, '8de1d124', '2024-12-11 19:45:53', 5),
+(5, '8de1d124', '2024-12-11 19:45:57', 6),
+(5, '7d5cebcc', '2024-12-11 21:10:05', 7),
+(6, '4a63b755', '2024-12-11 21:29:08', 8),
+(6, 'a58310ae', '2024-12-11 21:32:00', 9),
+(6, '2258126e', '2024-12-11 21:33:26', 10),
+(6, '983c6d75', '2024-12-11 21:35:04', 11),
+(6, 'dba73a65', '2024-12-11 21:35:45', 12);
 
 -- --------------------------------------------------------
 
@@ -88,6 +123,7 @@ ALTER TABLE `questoes`
 -- Índices de tabela `respostas`
 --
 ALTER TABLE `respostas`
+  ADD PRIMARY KEY (`id`),
   ADD KEY `id_usuario` (`id_usuario`),
   ADD KEY `id_questao` (`id_questao`);
 
@@ -101,6 +137,12 @@ ALTER TABLE `usuarios`
 --
 -- AUTO_INCREMENT para tabelas despejadas
 --
+
+--
+-- AUTO_INCREMENT de tabela `respostas`
+--
+ALTER TABLE `respostas`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT de tabela `usuarios`

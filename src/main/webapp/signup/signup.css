@@ -104,6 +104,7 @@ a {
 
 .btn {
   display: block;
+  width: 100%;
   padding: 0.5em 1em;
   font-size: 0.9rem;
   font-weight: 300;
@@ -165,7 +166,7 @@ a {
   flex-direction: column;
   justify-content: unset;
   align-items: center;
-  gap: 2em;
+  gap: var(--main-current-spacing);
   min-height: 100vh;
   padding: var(--main-current-spacing);
   background-color: var(--white);
@@ -318,6 +319,7 @@ a {
 
 .btn {
   display: block;
+  width: 100%;
   padding: 0.5em 1em;
   font-size: 0.9rem;
   font-weight: 300;
@@ -379,7 +381,7 @@ a {
   flex-direction: column;
   justify-content: unset;
   align-items: center;
-  gap: 2em;
+  gap: var(--main-current-spacing);
   min-height: 100vh;
   padding: var(--main-current-spacing);
   background-color: var(--white);

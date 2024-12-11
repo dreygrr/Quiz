@@ -9,8 +9,6 @@
 .profile-about {
     --user-ppic-gradient: linear-gradient(235deg, var(--emerald400) 0, var(--indigo400) 100%);
 
-    --stat: var(--indigo200);
-
     align-items: center;
     
     .user-ppic {
@@ -31,23 +29,26 @@
             width: 100%;
         }
 
-        .stats {
-            @include doFlex(row, center, stretch , 1em);
-            flex-wrap: wrap;
-    
-            .stat {
-                @include doFlex(row, unset, center, 1em);
-                padding: 1em;
-                border-radius: .5em;
-                background-color: var(--stat);
-    
-                .icon {font-size: 2.5rem; mix-blend-mode: multiply; opacity: .25;}
-    
-                .content {
-                    h4 {font-size: 1rem; font-weight: bold;}
-                    h3 {font-size: 1.12rem; font-weight: normal;}
-                }
-            }
+    }
+}
+
+.stats {
+    --stat: var(--indigo200);
+
+    @include doFlex(row, center, stretch , 1em);
+    flex-wrap: wrap;
+
+    .stat {
+        @include doFlex(row, unset, center, 1em);
+        padding: 1em;
+        border-radius: .5em;
+        background-color: var(--stat);
+
+        .icon {font-size: 2.5rem; mix-blend-mode: multiply; opacity: .25;}
+
+        .content {
+            h4 {font-size: 1rem; font-weight: bold;}
+            h3 {font-size: 1.12rem; font-weight: normal;}
         }
     }
 }

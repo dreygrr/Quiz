@@ -10,6 +10,7 @@ public class Question {
   private String difficulty;
   private String correctAnswer;
   private List<String> incorrectAnswers;
+  private List<String> shuffledAnswers; //all answers, but shuffled; fixed shuffles
   
   public Question() {}
 
@@ -19,6 +20,11 @@ public class Question {
     this.difficulty = difficulty;
     this.correctAnswer = correctAnswer;
     this.incorrectAnswers = new ArrayList<>(incorrectAnswers); // Garantir cópia para evitar mutação externa
+    
+    //fixed shuffle
+    this.shuffledAnswers = new ArrayList<>(incorrectAnswers);
+    this.shuffledAnswers.add(correctAnswer);
+    Collections.shuffle(this.shuffledAnswers);
   }
   
   public String getId() {
@@ -58,6 +64,10 @@ public class Question {
   }
   public void setIncorrectAnswers(List<String> incorrectAnswers) {
     this.incorrectAnswers = incorrectAnswers;
+  }
+  
+  public List<String> getShuffledAnswers() {
+    return new ArrayList<>(shuffledAnswers);
   }
 
   public List<String> getAllAnswersShuffled() {

@@ -13,6 +13,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import model.QuestionDAO;
 
 import model.User;
 import model.UserDAO;
@@ -26,10 +27,18 @@ public class LoginController extends HttpServlet {
     String senha = request.getParameter("senha");
 
     UserDAO userDAO = new UserDAO();
+    QuestionDAO questionDAO = new QuestionDAO();
     
     if (userDAO.validateLogin(apelido, senha)) {
       User user = userDAO.getUser(apelido);
+      
+      int userTotalScore = questionDAO.calculateUserScore(user.getApelido());
+      int userAnswersCount = userDAO.countCorrectAnswers(apelido);
+      
       request.getSession().setAttribute("_user", user);
+      request.getSession().setAttribute("userTotalScore", userTotalScore);
+      request.getSession().setAttribute("userAnswersCount", userAnswersCount);
+      
       response.sendRedirect("/Quiz/dashboard/");
     } else {
       request.getSession().setAttribute("wrongCredentials", true);

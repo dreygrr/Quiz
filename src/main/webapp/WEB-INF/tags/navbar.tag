@@ -11,6 +11,13 @@
     <c:choose>
       <c:when test="${not empty sessionScope._user}">
         <li>
+          <a href="${pageContext.request.contextPath}/#/">
+            <i class="fa-solid fa-star"></i>
+            <p> +${sessionScope.userTotalScore}</p>
+          </a>
+        </li>
+        
+        <li>
           <a href="${pageContext.request.contextPath}/dashboard/">
             <div 
               class="user-ppic"

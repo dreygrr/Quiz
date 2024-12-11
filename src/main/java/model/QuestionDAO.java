@@ -77,23 +77,26 @@ public class QuestionDAO {
   }
 
   // Calcula a pontuação total de um usuário
-  public int calculateUserScore(int userId) {
+  public int calculateUserScore(String apelido) {
     String query = """
-            SELECT SUM(CASE dificuldade
-                        WHEN 'easy' THEN 3
-                        WHEN 'medium' THEN 6
-                        WHEN 'hard' THEN 10
-                        ELSE 0
-                    END) AS total_score
-            FROM respostas r
-            INNER JOIN questoes q ON r.id_questao = q.id
-            WHERE r.id_usuario = ?
-            """;
+      SELECT SUM(
+        CASE dificuldade
+          WHEN 'easy' THEN 3
+          WHEN 'medium' THEN 6
+          WHEN 'hard' THEN 10
+          ELSE 0
+          END
+        ) AS total_score
+        FROM respostas r
+        INNER JOIN questoes q ON r.id_questao = q.id
+        INNER JOIN usuarios u ON r.id_usuario = u.id
+        WHERE u.apelido = ?
+      """;
 
     try (Connection con = getConnection();
       PreparedStatement stmt = con.prepareStatement(query)) {
 
-      stmt.setInt(1, userId);
+      stmt.setString(1, apelido);
       ResultSet rs = stmt.executeQuery();
 
       if (rs.next())
